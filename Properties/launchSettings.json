@@ -1,0 +1,8 @@
+{
+  "profiles": {
+    "StockDecisor": {
+      "commandName": "Project",
+      "commandLineArgs": "27 30 PETR4"
+    }
+  }
+}
