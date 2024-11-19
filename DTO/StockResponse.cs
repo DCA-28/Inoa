@@ -1,4 +1,4 @@
-namespace StockDTO
+namespace StockDecisor.DTO
 {
     public class StockResponse
     {

@@ -1,4 +1,4 @@
-using StockDTO;
+using StockDecisor.DTO;
 using Microsoft.Extensions.Logging;
 using System.Text.Json;
 
