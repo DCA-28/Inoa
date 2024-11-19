@@ -17,7 +17,8 @@ namespace StockDecisor.Service
 
         public async Task<StockResponse?> GetStockInfoAsync(string symbol)
         {
-            string url = $"https://brapi.dev/api/quote/{symbol}?token=drWj61XX5ZomtHNqre9qB7";
+            var apiToken = Environment.GetEnvironmentVariable("BRAPI_TOKEN");
+            string url = $"https://brapi.dev/api/quote/{symbol}?token={apiToken}";
 
             try
             {
