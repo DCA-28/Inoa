@@ -1,6 +1,9 @@
 using System.ComponentModel.DataAnnotations;
 using System.Numerics;
+using System.Runtime.CompilerServices;
 using System.Text.Json;
+using Microsoft.Extensions.Logging;
+using StockDecisor.Service;
 using StockDTO;
 
 class StockApp
@@ -8,23 +11,20 @@ class StockApp
     
     public static async Task Main(string[] args)
         {
-            Console.WriteLine("Hello World!");
             using (var httpClient = new HttpClient())
             {
                 double sellPrice = Convert.ToDouble(args[0]);
                 double buyPrice =  Convert.ToDouble(args[1]);
                 String stockSymbol = args[2];
 
-                var url = $"https://brapi.dev/api/quote/PETR4?token=drWj61XX5ZomtHNqre9qB7";
-                var request = await httpClient.GetAsync(url);
-                var jsonString = await request.Content.ReadAsStringAsync();
+                using var loggerFactory = LoggerFactory.Create(loggingBuilder =>
+                    loggingBuilder.SetMinimumLevel(LogLevel.Trace));
 
-                JsonSerializerOptions options = new JsonSerializerOptions
-                {
-                    PropertyNameCaseInsensitive = true
-                };
+                var logger = loggerFactory.CreateLogger<BrapiService>();
 
-                StockResponse? stockResponse = JsonSerializer.Deserialize<StockResponse>(jsonString, options);
+                BrapiService brapiService = new BrapiService(httpClient, logger);
+
+                StockResponse? stockResponse = await brapiService.GetStockInfoAsync(stockSymbol);
                 StockInfo? stockInfo = stockResponse?.Results?.Where(s => s.Symbol == "PETR4").FirstOrDefault();
                 var marketPrice = stockInfo?.RegularMarketPrice;
 
@@ -39,8 +39,6 @@ class StockApp
                 }
 
                 Console.WriteLine($"Final execution");
-
-
             }
         }
 }
