@@ -19,7 +19,7 @@ namespace StockDecisor.BLL
             }
             else
             {
-                Console.WriteLine($"{stockParameter.Symbol} is to cheap to sell but expensive to buy!");
+                Console.WriteLine($"{stockParameter.Symbol} is to cheap to sell but expensive to buy, keep it in the wallet!");
             }
         }
     }
