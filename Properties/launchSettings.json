@@ -4,7 +4,7 @@
       "commandName": "Project",
       "commandLineArgs": "27 30 PETR4",
       "environmentVariables": {
-        "BRAPI_TOKEN": "drWj61XX5ZomtHNqre9qB7",
+        "BRAPI_TOKEN": "YOUR_TOKEN_HERE",
         "WAITING_TIME_MILLISECONDS": "10000"
       }
     }
